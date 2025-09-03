@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: "Arial", sans-serif;
-      background: #e8f5e9; /* <-- đổi màu nền ở đây */
+      background: #e8f5e9;
       margin: 0;
       padding: 20px;
       text-align: center;
@@ -93,10 +93,10 @@
 </head>
 <body>
   <div class="quiz-container" id="quiz">
-    <h2>Câu hỏi: Tài liệu nào khiến bạn cho rằng hướng điều tra của chúng ta đang sai</h2>
+    <h2>Câu hỏi: Ai là thủ phạm?</h2>
     <div class="subtitle">Bạn hãy chọn 2 đáp án đúng trong số các lựa chọn sau:</div>
 
-    <ul class="answers" id="q1">
+        <ul class="answers" id="q1">
       <li><input type="checkbox" value="0" id="ans0"><label for="ans0">Báo cáo vụ án</label></li>
       <li><input type="checkbox" value="1" id="ans1"><label for="ans1">Câu hỏi về nạn nhân</label></li>
       <li><input type="checkbox" value="2" id="ans2"><label for="ans2">Lời khai nhân chứng: Nguyễn Văn Hải</label></li>
@@ -112,7 +112,7 @@
   </div>
 
   <div id="result-img">
-    <img src="Giải thích mục tiêu 1.jpeg" alt="Kết quả">
+    <img id="result-image" src="" alt="Kết quả">
   </div>
 
   <script>
@@ -127,14 +127,20 @@
         return;
       }
 
-      // Ví dụ: đáp án đúng là 8
-      const correct = [5,8];
+      const correct = [2, 5]; // đáp án đúng (C và F)
       selected.sort();
+
+      document.getElementById('quiz').style.display = 'none';
+      document.getElementById('result-img').style.display = 'block';
+
       if (JSON.stringify(selected) === JSON.stringify(correct)) {
-        document.getElementById('quiz').style.display = 'none';
-        document.getElementById('result-img').style.display = 'block';
+        // hiện ảnh khi trả lời đúng
+        document.getElementById('result-image').src =
+          "https://github.com/designdaovn/Hosomat-acgiaacbao/blob/main/Gi%E1%BA%A3i%20th%C3%ADch%20m%E1%BB%A5c%20ti%C3%AAu%201.jpeg";
       } else {
-        alert("Sai rồi, hãy thử lại!");
+        // hiện ảnh khi trả lời sai
+        document.getElementById('result-image').src =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/No_Cross_Circle.svg/240px-No_Cross_Circle.svg.png";
       }
     }
   </script>

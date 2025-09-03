@@ -2,173 +2,139 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz: Tìm hung thủ</title>
+  <title>Quiz</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .quiz-box {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      max-width: 800px;
-      width: 100%;
-      animation: fadeIn 0.8s ease;
-    }
-
-    h2 {
-      margin: 1rem 0;
-      color: #333;
-    }
-
-    .answers {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    button.option {
-      padding: 0.8rem;
-      border: none;
-      border-radius: 12px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    button.option:hover {
-      background: #0056b3;
-      transform: scale(1.03);
-    }
-
-    /* Khi được chọn */
-    button.option.selected {
-      background: #004085; /* xanh dương đậm hơn */
-    }
-
-    .check-btn {
-      display: block;
-      width: 100%;
-      margin-top: 1rem;
-      padding: 1rem;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 12px;
-      background: #28a745;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .check-btn:hover {
-      background: #1e7e34;
-    }
-
-    .feedback {
-      margin-top: 1.5rem;
-      font-weight: bold;
-      font-size: 1.2rem;
-      display: none;
-      padding: 1rem;
-      border-radius: 12px;
-    }
-
-    .wrong {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-
-    .result-img {
-      display: none;
+      font-family: "Arial", sans-serif;
+      background: #e8f5e9; /* <-- đổi màu nền ở đây */
+      margin: 0;
+      padding: 20px;
       text-align: center;
     }
 
-    .result-img img {
-      max-width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: left;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .answers {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px 0;
+    }
+
+    .answers li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .answers input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .answers label {
+      cursor: pointer;
+      flex: 1;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: #28a745;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    #result-img {
+      display: none;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    #result-img img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
-  <div class="quiz-box" id="quiz-box">
-    <h2>Câu hỏi 1: Ai là hung thủ?</h2>
-    <div class="answers" id="q1">
-      <button class="option" onclick="selectAnswer(1,'A',this)">A. Sam</button>
-      <button class="option" onclick="selectAnswer(1,'B',this)">B. Martin</button>
-      <button class="option" onclick="selectAnswer(1,'C',this)">C. Jerry</button>
-      <button class="option" onclick="selectAnswer(1,'D',this)">D. John</button>
-      <button class="option" onclick="selectAnswer(1,'E',this)">E. Paul</button>
-      <button class="option" onclick="selectAnswer(1,'F',this)">F. Steve</button>
-      <button class="option" onclick="selectAnswer(1,'G',this)">G. David</button>
-      <button class="option" onclick="selectAnswer(1,'H',this)">H. Peter</button>
-    </div>
+  <div class="quiz-container" id="quiz">
+    <h2>Câu hỏi: Tài liệu nào khiến bạn cho rằng hướng điều tra của chúng ta đang sai</h2>
+    <div class="subtitle">Bạn hãy chọn 2 đáp án đúng trong số các lựa chọn sau:</div>
 
-    <h2>Câu hỏi 2: Hung thủ gây án lúc mấy giờ?</h2>
-    <div class="answers" id="q2">
-      <button class="option" onclick="selectAnswer(2,'A',this)">A. 7h sáng</button>
-      <button class="option" onclick="selectAnswer(2,'B',this)">B. 9h sáng</button>
-      <button class="option" onclick="selectAnswer(2,'C',this)">C. 12h trưa</button>
-      <button class="option" onclick="selectAnswer(2,'D',this)">D. 3h chiều</button>
-      <button class="option" onclick="selectAnswer(2,'E',this)">E. 5h chiều</button>
-      <button class="option" onclick="selectAnswer(2,'F',this)">F. 8h tối</button>
-      <button class="option" onclick="selectAnswer(2,'G',this)">G. 10h tối</button>
-      <button class="option" onclick="selectAnswer(2,'H',this)">H. Nửa đêm</button>
-    </div>
+    <ul class="answers" id="q1">
+      <li><input type="checkbox" value="0" id="ans0"><label for="ans0">Báo cáo vụ án</label></li>
+      <li><input type="checkbox" value="1" id="ans1"><label for="ans1">Câu hỏi về nạn nhân</label></li>
+      <li><input type="checkbox" value="2" id="ans2"><label for="ans2">Lời khai nhân chứng: Nguyễn Văn Hải</label></li>
+      <li><input type="checkbox" value="3" id="ans3"><label for="ans3">Lời khai nhân chứng: Nguyễn Thị Lan</label></li>
+      <li><input type="checkbox" value="4" id="ans4"><label for="ans4">Lời khai nhân chứng: Nguyễn Nhật Linh</label></li>
+      <li><input type="checkbox" value="5" id="ans5"><label for="ans5">Lời khai nghi phạm: Nguyễn Ngọc</label></li>
+      <li><input type="checkbox" value="6" id="ans6"><label for="ans6">Lời khai nghi phạm:Vũ Hải Yến</label></li>
+      <li><input type="checkbox" value="7" id="ans7"><label for="ans7">Lời khai nghi phạm: Hoàng TIến</label></li>
+      <li><input type="checkbox" value="8" id="ans8"><label for="ans8">Ảnh hiện trường</label></li>
+    </ul>
 
-    <button class="check-btn" onclick="checkAnswers()">Kiểm tra đáp án</button>
-
-    <div id="feedback" class="feedback"></div>
+    <button onclick="checkAnswers()">Kiểm tra đáp án</button>
   </div>
 
-  <div class="result-img" id="result-img">
-    <img src="secret.jpg" alt="Kết quả bí mật">
+  <div id="result-img">
+    <img src="Giải thích mục tiêu 1.jpeg" alt="Kết quả">
   </div>
 
   <script>
-    const correctAnswers = { q1: 'B', q2: 'H' };
-    let userAnswers = { q1: null, q2: null };
+    function checkAnswers() {
+      let selected = [];
+      document.querySelectorAll('#q1 input[type="checkbox"]:checked').forEach(cb => {
+        selected.push(parseInt(cb.value));
+      });
 
-    function selectAnswer(question, choice, btn) {
-      // Lưu đáp án
-      userAnswers["q"+question] = choice;
-
-      // Xóa selected của tất cả nút trong câu hỏi đó
-      const container = document.getElementById("q"+question);
-      const buttons = container.getElementsByClassName("option");
-      for (let b of buttons) {
-        b.classList.remove("selected");
+      if (selected.length !== 2) {
+        alert("Bạn phải chọn đúng 2 đáp án!");
+        return;
       }
 
-      // Thêm selected cho nút được chọn
-      btn.classList.add("selected");
-    }
-
-    function checkAnswers() {
-      const feedback = document.getElementById('feedback');
-      if (userAnswers.q1 === correctAnswers.q1 && userAnswers.q2 === correctAnswers.q2) {
-        document.getElementById('quiz-box').style.display = "none";
-        document.getElementById('result-img').style.display = "block";
+      // Ví dụ: đáp án đúng là 8
+      const correct = [5,8];
+      selected.sort();
+      if (JSON.stringify(selected) === JSON.stringify(correct)) {
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result-img').style.display = 'block';
       } else {
-        feedback.style.display = "block";
-        feedback.className = "feedback wrong";
-        feedback.textContent = "❌ Chưa chính xác, hãy thử lại!";
+        alert("Sai rồi, hãy thử lại!");
       }
     }
   </script>

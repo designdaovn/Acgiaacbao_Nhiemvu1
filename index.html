@@ -89,22 +89,66 @@
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
+
+    /* --- Popup Box-up --- */
+    .popup {
+      display: none; /* ẩn mặc định */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-content {
+      position: relative;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .popup-content img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .popup-close:hover {
+      color: red;
+    }
   </style>
 </head>
 <body>
   <div class="quiz-container" id="quiz">
-    <h2>Câu hỏi: Ai là thủ phạm?</h2>
-    <div class="subtitle">Bạn hãy chọn 2 đáp án đúng trong số các lựa chọn sau:</div>
+    <h2>Câu hỏi: Tìm ra hướng đi đúng của vụ án</h2>
+    <div class="subtitle">Đâu là những vật chứng khiến bạn đưa ra hướng đi mới cho vụ án</div>
 
-        <ul class="answers" id="q1">
+    <ul class="answers" id="q1">
       <li><input type="checkbox" value="0" id="ans0"><label for="ans0">Báo cáo vụ án</label></li>
       <li><input type="checkbox" value="1" id="ans1"><label for="ans1">Câu hỏi về nạn nhân</label></li>
       <li><input type="checkbox" value="2" id="ans2"><label for="ans2">Lời khai nhân chứng: Nguyễn Văn Hải</label></li>
       <li><input type="checkbox" value="3" id="ans3"><label for="ans3">Lời khai nhân chứng: Nguyễn Thị Lan</label></li>
       <li><input type="checkbox" value="4" id="ans4"><label for="ans4">Lời khai nhân chứng: Nguyễn Nhật Linh</label></li>
       <li><input type="checkbox" value="5" id="ans5"><label for="ans5">Lời khai nghi phạm: Nguyễn Ngọc</label></li>
-      <li><input type="checkbox" value="6" id="ans6"><label for="ans6">Lời khai nghi phạm:Vũ Hải Yến</label></li>
-      <li><input type="checkbox" value="7" id="ans7"><label for="ans7">Lời khai nghi phạm: Hoàng TIến</label></li>
+      <li><input type="checkbox" value="6" id="ans6"><label for="ans6">Lời khai nghi phạm: Vũ Hải Yến</label></li>
+      <li><input type="checkbox" value="7" id="ans7"><label for="ans7">Lời khai nghi phạm: Hoàng Tiến</label></li>
       <li><input type="checkbox" value="8" id="ans8"><label for="ans8">Ảnh hiện trường</label></li>
     </ul>
 
@@ -113,6 +157,14 @@
 
   <div id="result-img">
     <img id="https://github.com/designdaovn/Hosomat-acgiaacbao/blob/main/Giai%20thich%20copy.jpg" src="" alt="Kết quả">
+  </div>
+
+  <!-- Popup hiển thị khi sai -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="popup-close" onclick="closePopup()">×</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/No_Cross_Circle.svg/240px-No_Cross_Circle.svg.png" alt="Sai rồi">
+    </div>
   </div>
 
   <script>
@@ -127,23 +179,24 @@
         return;
       }
 
-      const correct = [2, 5]; // đáp án đúng (C và F)
+      const correct = [2, 5]; // đáp án đúng
       selected.sort();
 
-      document.getElementById('quiz').style.display = 'none';
-      document.getElementById('result-img').style.display = 'block';
-
       if (JSON.stringify(selected) === JSON.stringify(correct)) {
-        // hiện ảnh khi trả lời đúng
+        // Nếu đúng → ẩn quiz, hiện ảnh kết quả
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('result-img').style.display = 'block';
         document.getElementById('result-image').src =
-          "https://github.com/designdaovn/Hosomat-acgiaacbao/blob/main/Gi%E1%BA%A3i%20th%C3%ADch%20m%E1%BB%A5c%20ti%C3%AAu%201.jpeg";
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/240px-Yes_Check_Circle.svg.png";
       } else {
-        // hiện ảnh khi trả lời sai
-        document.getElementById('result-image').src =
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/No_Cross_Circle.svg/240px-No_Cross_Circle.svg.png";
+        // Nếu sai → hiện popup
+        document.getElementById('popup').style.display = 'flex';
       }
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
     }
   </script>
 </body>
 </html>
-

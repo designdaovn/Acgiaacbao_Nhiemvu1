@@ -179,7 +179,7 @@
         return;
       }
 
-      const correct = [2, 5]; // đáp án đúng
+      const correct = [5, 8]; // đáp án đúng
       selected.sort();
 
       if (JSON.stringify(selected) === JSON.stringify(correct)) {
@@ -187,7 +187,7 @@
         document.getElementById('quiz').style.display = 'none';
         document.getElementById('result-img').style.display = 'block';
         document.getElementById('result-image').src =
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/240px-Yes_Check_Circle.svg.png";
+          "https://raw.githubusercontent.com/designdaovn/Hosomat-acgiaacbao/refs/heads/main/Giai%20thich%20copy.jpg";
       } else {
         // Nếu sai → hiện popup
         document.getElementById('popup').style.display = 'flex';
@@ -200,4 +200,5 @@
   </script>
 </body>
 </html>
+
 

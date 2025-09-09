@@ -141,19 +141,19 @@
     <div class="subtitle">Đâu là những vật chứng khiến bạn đưa ra hướng đi mới cho vụ án</div>
 
     <ul class="answers" id="q1">
-      <li><input type="checkbox" value="0" id="ans0"><label for="ans0">Báo cáo vụ án</label></li>
-      <li><input type="checkbox" value="1" id="ans1"><label for="ans1">Câu hỏi về nạn nhân</label></li>
-      <li><input type="checkbox" value="2" id="ans2"><label for="ans2">Lời khai nhân chứng: Nguyễn Văn Hải</label></li>
-      <li><input type="checkbox" value="3" id="ans3"><label for="ans3">Lời khai nhân chứng: Nguyễn Thị Lan</label></li>
-      <li><input type="checkbox" value="4" id="ans4"><label for="ans4">Lời khai nhân chứng: Nguyễn Nhật Linh</label></li>
-      <li><input type="checkbox" value="5" id="ans5"><label for="ans5">Lời khai nghi phạm: Nguyễn Ngọc</label></li>
-      <li><input type="checkbox" value="6" id="ans6"><label for="ans6">Lời khai nghi phạm: Vũ Hải Yến</label></li>
-      <li><input type="checkbox" value="7" id="ans7"><label for="ans7">Lời khai nghi phạm: Hoàng Tiến</label></li>
-      <li><input type="checkbox" value="8" id="ans8"><label for="ans8">Giám định mẫu vật: con dao</label></li>
-      <li><input type="checkbox" value="9" id="ans9"><label for="ans9">Giám định mẫu vật: đôi giày của Ngọc </label></li>
-      <li><input type="checkbox" value="10" id="ans10"><label for="ans10">Giám định mẫu vật: Ly rượu</label></li>
-      <li><input type="checkbox" value="11" id="ans11"><label for="ans11">Ảnh hiện trường</label></li>
-    </ul>
+  <li><input type="checkbox" value="1" id="ans1"><label for="ans1">Báo cáo vụ án</label></li>
+  <li><input type="checkbox" value="2" id="ans2"><label for="ans2">Câu hỏi về nạn nhân</label></li>
+  <li><input type="checkbox" value="3" id="ans3"><label for="ans3">Lời khai nhân chứng: Nguyễn Văn Hải</label></li>
+  <li><input type="checkbox" value="4" id="ans4"><label for="ans4">Lời khai nhân chứng: Nguyễn Thị Lan</label></li>
+  <li><input type="checkbox" value="5" id="ans5"><label for="ans5">Lời khai nhân chứng: Nguyễn Nhật Linh</label></li>
+  <li><input type="checkbox" value="6" id="ans6"><label for="ans6">Lời khai nghi phạm: Nguyễn Ngọc</label></li>
+  <li><input type="checkbox" value="7" id="ans7"><label for="ans7">Lời khai nghi phạm: Vũ Hải Yến</label></li>
+  <li><input type="checkbox" value="8" id="ans8"><label for="ans8">Lời khai nghi phạm: Hoàng Tiến</label></li>
+  <li><input type="checkbox" value="9" id="ans9"><label for="ans9">Giám định mẫu vật: con dao</label></li>
+  <li><input type="checkbox" value="10" id="ans10"><label for="ans10">Giám định mẫu vật: đôi giày của Ngọc</label></li>
+  <li><input type="checkbox" value="11" id="ans11"><label for="ans11">Giám định mẫu vật: Ly rượu</label></li>
+  <li><input type="checkbox" value="12" id="ans12"><label for="ans12">Ảnh hiện trường</label></li>
+</ul>
 
     <button onclick="checkAnswers()">Kiểm tra đáp án</button>
   </div>
@@ -182,7 +182,7 @@
         return;
       }
 
-      const correct = [5, 8, 11]; // đáp án đúng
+      const correct = [6, 9, 12]; // đáp án đúng
       selected.sort();
 
       if (JSON.stringify(selected) === JSON.stringify(correct)) {
@@ -203,6 +203,7 @@
   </script>
 </body>
 </html>
+
 
 
 

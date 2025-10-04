@@ -59,6 +59,7 @@
       flex: 1;
     }
 
+    /* nút chính */
     button {
       display: block;
       margin: 0 auto;
@@ -71,6 +72,8 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background 0.3s;
+      width: 100%;  /* ✅ đảm bảo full chiều rộng container */
+      box-sizing: border-box;
     }
 
     button:hover {
@@ -133,6 +136,27 @@
     .popup-close:hover {
       color: red;
     }
+
+    /* --- Nút Gợi ý (same size như nút chính) --- */
+    .hint-box {
+      display: block;
+      margin: 15px auto 0;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      background: transparent;
+      border: 2px solid #555;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      width: 100%;      /* ✅ cùng full width với nút kia */
+      box-sizing: border-box;
+    }
+
+    .hint-box:hover {
+      background: #f8f8f8;
+    }
   </style>
 </head>
 <body>
@@ -156,17 +180,26 @@
     </ul>
 
     <button onclick="checkAnswers()">Kiểm tra đáp án</button>
+    <button class="hint-box" onclick="showHintPopup()">Gợi ý</button>
   </div>
 
   <div id="result-img">
     <img id="result-image" src="" alt="Kết quả">
   </div>
 
-  <!-- Popup khi sai -->
+  <!-- Popup sai -->
   <div class="popup" id="popup">
     <div class="popup-content">
-      <span class="popup-close" onclick="closePopup()">×</span>
+      <span class="popup-close" onclick="closePopup('popup')">×</span>
       <img id="popup-img" src="" alt="Sai rồi">
+    </div>
+  </div>
+
+  <!-- Popup gợi ý -->
+  <div class="popup" id="hint-popup">
+    <div class="popup-content">
+      <span class="popup-close" onclick="closePopup('hint-popup')">×</span>
+      <img id="hint-popup-img" src="" alt="Gợi ý">
     </div>
   </div>
 
@@ -186,22 +219,39 @@
       selected.sort((a,b) => a-b);
 
       if (JSON.stringify(selected) === JSON.stringify(correct)) {
-        // đúng → ẩn quiz, hiện ảnh kết quả
         document.getElementById('quiz').style.display = 'none';
         document.getElementById('result-img').style.display = 'block';
         document.getElementById('result-image').src =
           "https://raw.githubusercontent.com/designdaovn/Hosomat-acgiaacbao/refs/heads/main/Giai%20thich%20copy.jpg";
       } else {
-        // sai → hiện popup với ảnh sai
         document.getElementById('popup').style.display = 'flex';
         document.getElementById('popup-img').src =
           "https://raw.githubusercontent.com/designdaovn/Hosomat-acgiaacbao/refs/heads/main/khichondaansai.png";
       }
     }
 
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
+    function closePopup(id) {
+      const p = document.getElementById(id);
+      if (p) p.style.display = 'none';
     }
+
+    function showHintPopup() {
+      const HINT_IMAGE_URL = "https://raw.githubusercontent.com/designdaovn/Hosomat-acgiaacbao/refs/heads/main/goi%20y%201.png";
+      document.getElementById('hint-popup-img').src = HINT_IMAGE_URL;
+      document.getElementById('hint-popup').style.display = 'flex';
+    }
+
+    document.querySelectorAll('.popup').forEach(p => {
+      p.addEventListener('click', (e) => {
+        if (e.target === p) p.style.display = 'none';
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      }
+    });
   </script>
 </body>
 </html>
